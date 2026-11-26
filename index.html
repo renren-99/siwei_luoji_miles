@@ -21,11 +21,14 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @media(max-width:700px){.thinking-types{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-bottom:19px}.thinking-types button{min-height:57px;font-size:13px}.toolbar{margin-bottom:10px}}
 @media(max-width:360px){.tabs button{padding:10px 5px;font-size:13px}.level-grid{gap:8px}.level-choice{padding:12px;font-size:14px}.brand{font-size:18px}.bottom-controls{gap:6px}.primary{padding:13px 12px}.secondary{padding:12px 10px}footer{flex-wrap:wrap;gap:6px}}
 
+/* Text has its own touch/keyboard target; picture and dock clicks still match. */
+#board .readable-text{cursor:pointer;outline:none}#board .readable-text .read-hit{pointer-events:all}#board .readable-text:hover .read-hit,#board .readable-text:focus-visible .read-hit,#board .readable-text.speaking .read-hit{fill:#f4c56533;stroke:#dca846;stroke-width:1.5}.read-status{color:#718263;font-size:12px;line-height:1.6;margin:12px 4px 0;min-height:20px}.read-control.speaking rect{fill:#f7e8b5}.q-background:focus-visible{stroke:var(--token);stroke-width:5}
+
 </style></head>
 <body><div class="app"><header><a class="brand" href="./" aria-label="彩虹思维板首页"><span class="brand-icon">✿</span><span>彩虹思维板<small>小小脑袋，大大发现</small></span></a><div class="header-actions"><span class="age">4岁+ · 慢慢想，开心玩</span><button id="help" class="icon-btn" aria-label="玩法说明">?</button><button id="sound" class="icon-btn" aria-label="关闭提示音" aria-pressed="true">♫</button></div></header>
 <main><section class="toolbar" aria-label="题目选择"><div class="tabs" role="group" aria-label="练习分类"><button data-category="thinking" class="active">✿ 思维乐园</button><button data-category="addition">＋ 加法小屋</button><button data-category="subtraction">− 减法小屋</button></div><button id="library" class="library-btn">▦ 选一张题卡</button></section>
 <nav id="thinkingTypes" class="thinking-types" aria-label="思维训练类型"></nav>
-<div class="game-layout"><aside class="side-note"><div class="note-flower">✻</div><p>每一种颜色，<br>都有一个答案。</p><span>观察 · 思考 · 配对</span><div class="tiny-dots"><i></i><i></i><i></i><i></i><i></i><i></i></div></aside><section class="game" aria-label="彩虹轨道游戏"><div class="card-meta"><span id="levelLabel"></span><span id="progress"></span></div><svg id="board" viewBox="0 0 1000 1333.333" role="group" aria-label="六色配对游戏板"><defs><filter id="shadow" x="-60%" y="-60%" width="220%" height="230%"><feDropShadow dx="0" dy="5" stdDeviation="3" flood-opacity=".23"/></filter><filter id="paperShadow"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-opacity=".12"/></filter></defs><rect x="3" y="3" width="994" height="1321" rx="42" fill="#333d79"/><rect x="12" y="12" width="976" height="1303" rx="34" fill="none" stroke="#536096" stroke-width="2"/><rect x="31" y="30" width="755" height="1080" rx="20" fill="#fffdf7" filter="url(#paperShadow)"/><g id="tracks" stroke="#fffdf5" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"></g><g id="paper"></g><g id="slots"></g><g id="homes"></g><g id="tokens"></g><text x="44" y="1137" class="board-caption">把小圆钮送到答案旁边</text><text x="950" y="1300" text-anchor="end" class="board-sign">PLAY &amp; GROW</text></svg><div class="under-board"><span class="hint-icon">☝</span><p id="message" role="status" aria-live="polite">点一个彩色圆钮，再点右边的答案；也可以沿白线拖动。</p><button id="reset" class="text-btn">重新摆放</button></div><div class="bottom-controls"><button id="previous" class="secondary">上一张</button><button id="check" class="primary">✓ 检查答案 <span id="placedCount">0/6</span></button><button id="next" class="secondary">下一张</button></div></section><aside class="side-note right-note"><span class="sun">☀</span><p>不着急，<br>再看一看。</p><span>每一次尝试都很棒</span><div id="stars" aria-label="已完成题卡"></div></aside></div></main><footer>没有倒计时，只有小小的发现。<span id="completedCount">已完成 0 张题卡</span></footer></div>
+<div class="game-layout"><aside class="side-note"><div class="note-flower">✻</div><p>每一种颜色，<br>都有一个答案。</p><span>观察 · 思考 · 配对</span><div class="tiny-dots"><i></i><i></i><i></i><i></i><i></i><i></i></div></aside><section class="game" aria-label="彩虹轨道游戏"><div class="card-meta"><span id="levelLabel"></span><span id="progress"></span></div><svg id="board" viewBox="0 0 1000 1333.333" role="group" aria-label="六色配对游戏板"><defs><filter id="shadow" x="-60%" y="-60%" width="220%" height="230%"><feDropShadow dx="0" dy="5" stdDeviation="3" flood-opacity=".23"/></filter><filter id="paperShadow"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-opacity=".12"/></filter></defs><rect x="3" y="3" width="994" height="1321" rx="42" fill="#333d79"/><rect x="12" y="12" width="976" height="1303" rx="34" fill="none" stroke="#536096" stroke-width="2"/><rect x="31" y="30" width="755" height="1080" rx="20" fill="#fffdf7" filter="url(#paperShadow)"/><g id="tracks" stroke="#fffdf5" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"></g><g id="paper"></g><g id="slots"></g><g id="homes"></g><g id="tokens"></g><text x="44" y="1137" class="board-caption">把小圆钮送到答案旁边</text><text x="950" y="1300" text-anchor="end" class="board-sign">PLAY &amp; GROW</text></svg><p id="readStatus" class="read-status" role="status" aria-live="polite">点文字听朗读 · 点图片或停靠位配对</p><div class="under-board"><span class="hint-icon">☝</span><p id="message" role="status" aria-live="polite">点一个彩色圆钮，再点右边的答案；也可以沿白线拖动。</p><button id="reset" class="text-btn">重新摆放</button></div><div class="bottom-controls"><button id="previous" class="secondary">上一张</button><button id="check" class="primary">✓ 检查答案 <span id="placedCount">0/6</span></button><button id="next" class="secondary">下一张</button></div></section><aside class="side-note right-note"><span class="sun">☀</span><p>不着急，<br>再看一看。</p><span>每一次尝试都很棒</span><div id="stars" aria-label="已完成题卡"></div></aside></div></main><footer>没有倒计时，只有小小的发现。<span id="completedCount">已完成 0 张题卡</span></footer></div>
 <dialog id="modal"><div class="modal-top"><h2 id="modalTitle"></h2><button id="closeModal" class="icon-btn" aria-label="关闭">×</button></div><div id="modalContent"></div></dialog><div id="confetti" aria-hidden="true"></div><script>
 const COLORS=['#25bc49','#a344df','#ffcf19','#ff841b','#238ef4','#f04446'];
 const NAMES=['绿','紫','黄','橙','蓝','红'];
@@ -105,12 +108,12 @@ function answerLabel(answer){
 }
 function answerContentSvg(answer,i,y){
  const parts=String(answer).split(':');
- if(parts[0]==='group'){const group=GROUPS.find(g=>g.id===parts[1]);return svgText(709.5,y+1,group.icon,39)+svgText(709.5,y+34,group.name,group.name.length>3?19:22,'#607452');}
+ if(parts[0]==='group'){const group=GROUPS.find(g=>g.id===parts[1]);return svgText(709.5,y+1,group.icon,39)+readableText(709.5,y+34,group.name,group.name.length>3?19:22,'#607452');}
  if(parts[0]==='fig')return figureSvg(parts[1],709.5,y,65,'#65855c');
- if(parts[0]==='color')return `<circle cx="709.5" cy="${y-7}" r="23" fill="${COLORS[+parts[1]]}"/>`+svgText(709.5,y+35,answerLabel(answer),20,'#607452');
+ if(parts[0]==='color')return `<circle cx="709.5" cy="${y-7}" r="23" fill="${COLORS[+parts[1]]}"/>`+readableText(709.5,y+35,answerLabel(answer),20,'#607452');
  if(parts[0]==='cell')return gridSvg(+parts[1],+parts[2],+parts[3],669,y-37,81,74);
  if(parts[0]==='piece')return pieceSvg(parts[2],parts[1],709.5,y,82,`a${i}`);
- return svgText(709.5,y+17,answer,47,'#4f6047','middle',800);
+ return readableText(709.5,y+17,answer,47,'#4f6047','middle',800);
 }
 
 const $=id=>document.getElementById(id), svgNS='http://www.w3.org/2000/svg';
@@ -123,6 +126,34 @@ let answers=[];
 // escape the SVG viewBox scaling in iOS WebKit when positioned descendants paint.
 function xml(value){return String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');}
 function svgText(x,y,value,size=22,fill='#495247',anchor='middle',weight=400){return `<text x="${x}" y="${y}" text-anchor="${anchor}" font-size="${size}" font-weight="${weight}" fill="${fill}">${xml(value)}</text>`;}
+// A separate SVG hit area keeps text reading independent of answer placement.
+function readableText(x,y,value,size=22,fill='#495247',anchor='middle',weight=400,spoken=value){
+ const units=Array.from(String(value)).reduce((n,c)=>n+(/[\u3400-\u9fff]/.test(c)?1:.6),0),width=units*size+14,left=anchor==='start'?x-7:anchor==='end'?x-width+7:x-width/2;
+ return `<g class="readable-text" data-say="${xml(spoken)}" role="button" tabindex="0" aria-label="点读：${xml(spoken)}"><rect class="read-hit" x="${left}" y="${y-size-5}" width="${width}" height="${size+18}" rx="7" fill="transparent"/>${svgText(x,y,value,size,fill,anchor,weight)}</g>`;
+}
+function bindReading(){document.querySelectorAll('[data-say]').forEach(el=>{
+ el.onclick=e=>{e.stopPropagation();speakText(el.dataset.say,el)};
+ el.onpointerdown=e=>e.stopPropagation();
+ el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();speakText(el.dataset.say,el)}};
+});}
+let speechSequence=0,currentSpeech=null,readingElement=null;
+function stopReading(){
+ speechSequence++;if(readingElement)readingElement.classList.remove('speaking');readingElement=null;
+ if(currentSpeech&&window.speechSynthesis)window.speechSynthesis.cancel();currentSpeech=null;
+ $('readStatus').textContent='点文字听朗读 · 点图片或停靠位配对';
+}
+function speakText(text,element=null){
+ stopReading();
+ if(!window.speechSynthesis||!window.SpeechSynthesisUtterance){$('readStatus').textContent='这个浏览器暂不支持点读，请大人帮忙读一读。';return;}
+ const sequence=speechSequence,synth=window.speechSynthesis;
+ const spoken=String(text).replace(/\+/g,'加').replace(/[−-]/g,'减').replace(/=/g,'等于').replace(/[?？]/g,'多少');
+ const utterance=new window.SpeechSynthesisUtterance(spoken);currentSpeech=utterance;utterance.lang='zh-CN';utterance.rate=.8;
+ const voices=synth.getVoices(),voice=voices.find(v=>/^zh[-_]CN$/i.test(v.lang))||voices.find(v=>/^zh/i.test(v.lang));if(voice)utterance.voice=voice;
+ readingElement=element;if(element)element.classList.add('speaking');$('readStatus').textContent=`正在朗读：${text}`;
+ const finish=()=>{if(sequence!==speechSequence)return;if(readingElement)readingElement.classList.remove('speaking');readingElement=null;currentSpeech=null;$('readStatus').textContent='点文字听朗读 · 点图片或停靠位配对';};
+ utterance.onend=finish;utterance.onerror=e=>{if(sequence!==speechSequence)return;finish();if(e.error!=='interrupted'&&e.error!=='canceled')$('readStatus').textContent='暂时没有读出来，请再点一次文字。';};
+ try{synth.speak(utterance)}catch{finish();$('readStatus').textContent='暂时不能朗读，请再试一次。';}
+}
 function pictureSvg(picture){
  const items=picture.split(' ').filter(Boolean),columns=items.length>6?5:3,rows=Math.ceil(items.length/columns),step=items.length>6?43:63,size=items.length>6?38:48;
  return items.map((item,j)=>{const row=Math.floor(j/columns),count=Math.min(columns,items.length-row*columns);return svgText(136.5+(j%columns-(count-1)/2)*step,145+(row-(rows-1)/2)*59,item,size);}).join('');
@@ -134,19 +165,19 @@ function mathDots(q){
 }
 function questionSvg(q,i){
  const x=52+i%2*289,y=205+Math.floor(i/2)*285;
- const content=q.kind?advancedQuestionSvg(q,i):q.equation?svgText(136.5,118,`${q.equation} = ?`,38,'#495247','middle',800)+mathDots(q):q.shape?svgText(136.5,160,q.picture,85,'#849773'):pictureSvg(q.picture);
- return `<g role="button" tabindex="0" aria-label="选择${NAMES[i]}色题目" class="q-card" data-q="${i}" style="--token:${COLORS[i]}" transform="translate(${x} ${y})"><rect class="q-background" x="1" y="1" width="271" height="263" rx="17" fill="#fffefb" stroke="#e8e8da" stroke-width="2"/><circle cx="29" cy="29" r="13" fill="${COLORS[i]}" stroke="white" stroke-width="2"/>${svgText(50,36,NAMES[i]+'色',20,'#858b78','start')}${content}${svgText(136.5,234,q.subtitle,21,'#8b927c')}</g>`;
+ const content=q.kind?advancedQuestionSvg(q,i):q.equation?readableText(136.5,118,`${q.equation} = ?`,38,'#495247','middle',800)+mathDots(q):q.shape?svgText(136.5,160,q.picture,85,'#849773'):pictureSvg(q.picture);
+ return `<g class="q-card" data-q="${i}" style="--token:${COLORS[i]}" transform="translate(${x} ${y})"><rect role="button" tabindex="0" aria-label="选择${NAMES[i]}色题目" class="q-background" x="1" y="1" width="271" height="263" rx="17" fill="#fffefb" stroke="#e8e8da" stroke-width="2"/><circle cx="29" cy="29" r="13" fill="${COLORS[i]}" stroke="white" stroke-width="2"/>${readableText(50,36,NAMES[i]+'色',20,'#858b78','start')}${content}${readableText(136.5,234,q.subtitle,21,'#8b927c')}</g>`;
 }
 function paperSvg(l){
  const description=Array.from(l.desc),lines=[];for(let n=0;n<description.length;n+=26)lines.push(description.slice(n,n+26).join(''));
- return svgText(55,89,l.title,31,'#3d4b3e','start',800)+lines.map((line,i)=>svgText(55,130+i*30,line,21,'#8a907b','start')).join('')+`<g id="read" role="button" tabindex="0" aria-label="朗读题目说明" class="read-control"><rect x="508" y="57" width="108" height="43" rx="21" fill="#edf1e6"/>${svgText(562,85,'◖ 读题',18,'#70855e')}</g><line x1="636" x2="636" y1="180" y2="1080" stroke="#e8e8da" stroke-dasharray="5 7"/>`+l.questions.map(questionSvg).join('');
+ return readableText(55,89,l.title,31,'#3d4b3e','start',800)+lines.map((line,i)=>readableText(55,130+i*30,line,21,'#8a907b','start',400,l.desc)).join('')+`<g id="read" role="button" tabindex="0" aria-label="朗读题目说明" class="read-control"><rect x="508" y="57" width="108" height="43" rx="21" fill="#edf1e6"/>${svgText(562,85,'◖ 读题',18,'#70855e')}</g><line x1="636" x2="636" y1="180" y2="1080" stroke="#e8e8da" stroke-dasharray="5 7"/>`+l.questions.map(questionSvg).join('');
 }
 function answerSvg(a,i){
  const y=slot(i).y;
- return `<g class="answer-control" data-answer="${i}" role="button" tabindex="0" aria-label="答案 ${xml(answerLabel(a))}"><rect x="654" y="${y-52}" width="111" height="104" rx="12" fill="#f4f5ea" stroke="#e9eadf" stroke-width="2"/>${answerContentSvg(a,i,y)}</g><circle cx="845" cy="${y}" r="34" fill="#ffffff12" stroke="#b4bfd7" stroke-width="2" stroke-dasharray="4 5"/><circle class="slot-hit" data-slot="${i}" cx="845" cy="${y}" r="40" fill="transparent" role="button" tabindex="0" aria-label="答案 ${xml(answerLabel(a))} 的停靠位"/>`;
+ return `<g class="answer-control" data-answer="${i}"><rect role="button" tabindex="0" aria-label="答案 ${xml(answerLabel(a))}" x="654" y="${y-52}" width="111" height="104" rx="12" fill="#f4f5ea" stroke="#e9eadf" stroke-width="2"/>${answerContentSvg(a,i,y)}</g><circle cx="845" cy="${y}" r="34" fill="#ffffff12" stroke="#b4bfd7" stroke-width="2" stroke-dasharray="4 5"/><circle class="slot-hit" data-slot="${i}" cx="845" cy="${y}" r="40" fill="transparent" role="button" tabindex="0" aria-label="答案 ${xml(answerLabel(a))} 的停靠位"/>`;
 }
 function render(){
- drag=null;generation++;Object.keys(animations).forEach(k=>cancelAnimationFrame(animations[k]));animations={};destinations.fill(null);selected=null;assignments.fill(null);positions=COLORS.map((_,i)=>home(i));checked=false;
+ stopReading();drag=null;generation++;Object.keys(animations).forEach(k=>cancelAnimationFrame(animations[k]));animations={};destinations.fill(null);selected=null;assignments.fill(null);positions=COLORS.map((_,i)=>home(i));checked=false;
  const l=level();answers=[2,5,1,4,0,3].map((n,j)=>l.questions[(n+index)%6].answer);
  document.querySelectorAll('[data-category]').forEach(b=>b.classList.toggle('active',b.dataset.category===category));
  $('thinkingTypes').hidden=category!=='thinking';document.querySelectorAll('[data-training]').forEach(b=>{const active=b.dataset.training===training;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});
@@ -159,7 +190,7 @@ function render(){
  document.querySelectorAll('[data-q]').forEach(e=>{e.onclick=()=>select(+e.dataset.q);e.onkeydown=k=>{if(k.key==='Enter'||k.key===' '){k.preventDefault();select(+e.dataset.q)}}});
  document.querySelectorAll('[data-answer],[data-slot]').forEach(e=>{const f=()=>placeSelected(+(e.dataset.answer??e.dataset.slot));e.onclick=f;e.onkeydown=k=>{if(k.key==='Enter'||k.key===' '){k.preventDefault();f()}}});
  document.querySelectorAll('[data-token]').forEach(e=>{e.onpointerdown=startDrag;e.onkeydown=k=>{if(k.key==='Enter'||k.key===' '){k.preventDefault();select(+e.dataset.token)}else if(k.key==='Escape'){selected=null;updateSelection()}}});
- $('read').onclick=readQuestion;$('read').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();readQuestion()}};$('previous').disabled=index===0;$('next').disabled=index===filtered().length-1;
+ bindReading();$('read').onclick=readQuestion;$('read').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();readQuestion()}};$('previous').disabled=index===0;$('next').disabled=index===filtered().length-1;
  message('点一个彩色圆钮，再点右边的答案；也可以沿白线拖动。');update();
 }
 function message(s){$('message').textContent=s;}
@@ -221,7 +252,7 @@ function tone(freq,duration){if(!sound)return;try{const ctx=audioCtx||(audioCtx=
 let audioCtx;
 function check(){if(assignments.some(v=>v===null)){message('还有圆钮在等你，把六个颜色都送到答案旁边吧。');return}let correct=0;assignments.forEach((s,i)=>{const ok=answers[s]===level().questions[i].answer;if(ok)correct++;const el=$('token'+i);el.querySelector('.token-label').style.display='none';el.querySelector('.result-mark').textContent=ok?'✓':'· ·';el.querySelector('.result-mark').style.display='';});checked=true;if(correct===6){completed.add(level().id);try{localStorage.setItem('rainbow-completed',JSON.stringify([...completed]));}catch{}update();message('六个都找对了！你观察得真仔细。准备好就去玩下一张吧！');celebrate();[523,659,784].forEach((n,i)=>setTimeout(()=>tone(n,.18),i*130));}else{message(`已经找对 ${correct} 个啦！有小点点的圆钮，再看一看它的题目吧。`);tone(330,.15);}}
 function celebrate(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;$('confetti').innerHTML=Array.from({length:45},(_,i)=>`<i class="confetti" style="left:${Math.random()*100}%;background:${COLORS[i%6]};animation-delay:${Math.random()*.6}s"></i>`).join('');setTimeout(()=>$('confetti').replaceChildren(),3300);}
-function readQuestion(){if(!('speechSynthesis'in window)){message('这个浏览器暂时不能读题，请和大人一起读上面的说明。');return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(`${level().title}。${level().desc}。先点一个彩色圆钮，再点对应的答案。`);u.lang='zh-CN';u.rate=.8;u.onerror=()=>message('读题暂时不可用，可以请大人读一下上方说明。');speechSynthesis.speak(u);}
+function readQuestion(){speakText(`${level().title}。${level().desc}`, $('read'));}
 function modal(title,content){$('modalTitle').textContent=title;$('modalContent').innerHTML=content;$('modal').showModal();}
 function library(){
  const groups=category==='thinking'?Object.entries(THINKING_TYPES):[[category,{name:category==='addition'?'加法小屋':'减法小屋',icon:category==='addition'?'＋':'−'}]];
@@ -232,7 +263,7 @@ $('thinkingTypes').innerHTML=Object.entries(THINKING_TYPES).map(([key,t])=>`<but
 document.querySelectorAll('[data-training]').forEach(b=>b.onclick=()=>{training=b.dataset.training;index=0;render()});
 document.querySelectorAll('[data-category]').forEach(b=>b.onclick=()=>{category=b.dataset.category;index=0;render()});
 $('previous').onclick=()=>{if(index>0){index--;render()}};$('next').onclick=()=>{if(index<filtered().length-1){index++;render()}};$('reset').onclick=render;$('check').onclick=check;$('library').onclick=library;$('closeModal').onclick=()=>$('modal').close();$('modal').onclick=e=>{if(e.target===$('modal')){const r=$('modal').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)$('modal').close()}};
-$('help').onclick=()=>modal('一起玩彩虹思维板',`<div class="help-step"><b>1</b><span>先看顶部说明，再看带有颜色标记的六道题。</span></div><div class="help-step"><b>2</b><span>点底部对应颜色的圆钮，再点右侧答案。圆钮会沿白色轨道滑过去。也可以用手指沿轨道拖动，松手后圆钮会停在当前位置，可以分几次慢慢移动。圆钮不能互相穿过，前方被挡住时，先移动挡路的圆钮。</span></div><div class="help-step"><b>3</b><span>六个圆钮都放好后，点“检查答案”。小勾表示配对成功，小点点表示可以再试一次。</span></div><p class="help-foot">给陪伴的大人：共有31张题卡、186个小练习。思维乐园增加了分类找同类、空间位置、观察找不同、大小与数量比较、拼图补缺，每类3张题卡。建议从数数、形状和分类开始，再尝试位置、比较与拼图。可以请大人陪读说明，按孩子的节奏选择题卡。加减法配有圆点提示，可以边指边数。没有计时，也不扣分。完成记录仅保存在当前浏览器。</p>`);
-$('sound').onclick=()=>{sound=!sound;$('sound').textContent=sound?'♫':'♩';$('sound').setAttribute('aria-label',sound?'关闭提示音':'开启提示音');$('sound').setAttribute('aria-pressed',sound);if(!sound&&'speechSynthesis'in window)speechSynthesis.cancel();};render();
+$('help').onclick=()=>modal('一起玩彩虹思维板',`<div class="help-step"><b>1</b><span>先看顶部说明，再看带有颜色标记的六道题。标题、说明、颜色名、提示语和右边的文字都可以点读；点读不会移动圆钮。要配对，请点答案的图片、卡片空白处或右边的圆形停靠位。</span></div><div class="help-step"><b>2</b><span>点底部对应颜色的圆钮，再点右侧答案。圆钮会沿白色轨道滑过去。也可以用手指沿轨道拖动，松手后圆钮会停在当前位置，可以分几次慢慢移动。圆钮不能互相穿过，前方被挡住时，先移动挡路的圆钮。</span></div><div class="help-step"><b>3</b><span>六个圆钮都放好后，点“检查答案”。小勾表示配对成功，小点点表示可以再试一次。</span></div><p class="help-foot">给陪伴的大人：共有31张题卡、186个小练习。思维乐园增加了分类找同类、空间位置、观察找不同、大小与数量比较、拼图补缺，每类3张题卡。建议从数数、形状和分类开始，再尝试位置、比较与拼图。可以请大人陪读说明，按孩子的节奏选择题卡。加减法配有圆点提示，可以边指边数。没有计时，也不扣分。完成记录仅保存在当前浏览器。</p>`);
+$('sound').onclick=()=>{sound=!sound;$('sound').textContent=sound?'♫':'♩';$('sound').setAttribute('aria-label',sound?'关闭提示音':'开启提示音');$('sound').setAttribute('aria-pressed',sound);if(!sound)stopReading();};render();
 
 </script></body></html>
